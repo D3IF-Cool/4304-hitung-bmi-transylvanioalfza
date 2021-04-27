@@ -3,7 +3,6 @@ package org.d3if4118.hitungbmi.ui.hitung
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -56,11 +55,6 @@ class HitungFragment : Fragment() {
                 getKategori(it.kategori))
             binding.buttonGroup.visibility = View.VISIBLE
         })
-
-        viewModel.data.observe(viewLifecycleOwner, {
-            if (it == null) return@observe
-            Log.d("HitungFragment", "Data tersimpan. ID = ${it.id}")
-        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -69,10 +63,17 @@ class HitungFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_about) {
+        when (item.itemId) {
+            R.id.menu_about -> {
             findNavController().navigate(
                 R.id.action_hitungFragment_to_aboutFragment)
             return true
+        }
+            R.id.menu_histori -> {
+            findNavController().navigate(
+                R.id.action_hitungFragment_to_historiFragment)
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }
